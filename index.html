@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+	//Load dataTable
+        var data = new google.visualization.arrayToDataTable([
+          ['County', 'Confirmed Cases', 'Deaths'],
+          ['Allegheny', 1198, 73],
+          ['Berks',	2406, 88],
+          ['Bucks',	2541, 141],
+          ['Chester', 1134, 82],
+          ['Dauphin', 492, 18],
+		  ['Lackawanna', 772, 63],
+		  ['Delaware', 3161, 140],
+		  ['Lancaster', 1501, 139],
+		  ['Lebanon', 592, 7],
+		  ['Lehigh', 2551, 50],
+		  ['Luzerne', 1962, 66],
+		  ['Monroe', 1054, 44],
+		  ['Montgomery', 3627, 214],
+		  ['Northampton', 1780, 49],
+		  ['Philadelphia', 11877, 449],
+		  ['York', 578, 8],
+		  ['Westmoreland', 360, 19]
+        ]);
+	//the option is where you customise your chart: the width, chart title and subtitle, bar orientation, series position and axes label are all set here. 
+        var options = {
+          width: 1000,
+          chart: {
+            title: 'Counties in Pennsylvania Most Affected by Covid-19',
+            subtitle: 'Confirmed cases on the Left and Total Deaths on the Right axes'
+          },
+          bars: 'horizontal', // Required for Material Bar Charts.
+          series: {
+            0: { axis: 'confirmed' }, // Bind series 0 to an axis named 'deaths'.
+            1: { axis: 'deaths' } // Bind series 1 to an axis named 'confirmed'.
+          },
+          axes: {
+            x: {
+              confirmed: {label: 'Covid-19 Confirmed Cases as at 04/22/2020'}, // Creates Bottom x-axis.
+              deaths: {side: 'top', label: 'Covid-19 Deaths as at 04/22/2020'} // Creates Top x-axis.
+            }
+          }
+        };
+
+      var chart = new google.charts.Bar(document.getElementById('dual_x_div')); //Creates chart object
+      chart.draw(data, options); //draw function uses data and option to draw chart
+    };
+		//creates chart  and id and div
+    </script>
+  </head>
+  <body>
+    <div id="dual_x_div" style="width: 100%; height: 100%;"></div> 
+  </body>
+</html>
